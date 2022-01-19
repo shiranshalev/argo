@@ -1,6 +1,6 @@
 spec:
   destination:
-    server: https://kubernetes.default.svc:443
+    server: https://kubernetes.default.svc
   source:
     repoURL: https://github.com/galsolom/argo
     targetRevision: main

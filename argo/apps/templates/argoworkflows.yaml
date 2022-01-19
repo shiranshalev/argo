@@ -14,7 +14,7 @@ spec:
       version: v3
       valueFiles:
           - values.yaml
-    path: argo/argoworkflow
+    path: argo/argoworkflows
     repoURL: {{ .Values.spec.source.repoURL }}
     targetRevision: {{ .Values.spec.source.targetRevision }}
   syncPolicy:

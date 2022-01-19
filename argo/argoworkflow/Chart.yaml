@@ -1,0 +1,15 @@
+apiVersion: v2
+appVersion: v2.2.2
+description: workflows
+name: argo-workflow
+version: 3.30.0
+home: https://github.com/argoproj/argo-helm
+keywords:
+  - argoproj
+  - argoworkflows
+  - gitops
+dependencies:
+  - name: argo-workflows
+    version: 0.9.4
+    repository: https://argoproj.github.io/argo-helm/
+

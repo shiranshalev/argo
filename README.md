@@ -35,3 +35,30 @@ powershell get argo-workflows login
 ```
 kubectl get pods -n argo | ?{$_ -like "*workflows-server*"} | %{$_.split()[0]} | %{kubectl exec $_ -n argo  argo auth token} | scb
 ```
+
+
+## testing some workflow builds
+
+
+
+
+create docker-registry secret for kaniko:
+linux/gitbash
+```
+echo -n user:pass | base64
+```
+replace xxx with the encoded credentials
+```
+{
+	"auths": {
+		"https://index.docker.io/v1/": {
+			"auth": "xxxxxxxxxxxxxxx"
+		}
+	}
+}
+```
+create the secret
+mount it under /kaniko/.docker in the pod spec
+```
+kubectl create secret generic kaniko-docker-secret --from-file=config.json -n argo
+```

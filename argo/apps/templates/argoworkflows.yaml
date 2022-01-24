@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: argoworkflows
   namespace: argo
+  annotations:
+    link.argocd.argoproj.io/external-link: https://argoworkflows{{.Values.spec.domain}}
 spec:
   project: {{ .Values.spec.project }}
   destination:

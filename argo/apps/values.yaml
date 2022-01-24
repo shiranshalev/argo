@@ -5,3 +5,4 @@ spec:
     repoURL: https://github.com/galsolom/argo
     targetRevision: main
   project: default
+  domain: .gals.local

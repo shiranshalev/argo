@@ -7,13 +7,14 @@ metadata:
     workflows.argoproj.io/maintainer: '@gals'
     workflows.argoproj.io/tags: dotnet, git
     workflows.argoproj.io/version: '>= 2.9.0'
-  name: dotnet-build-dind
+  name: kaniko-build-wt
+  namespace: argo
 spec:
   entrypoint: main
   arguments:
     parameters:
       - name: repo
-        value: https://github.com/galsolom/testapp.git
+        value: github.com/galsolom/testapp.git
       - name: branch
         value: main
       - name: tag
@@ -23,43 +24,20 @@ spec:
   templates:
     - name: main
       steps:
-        - - name: checkout
-            template: checkout
         - - name: build
-            template: docker-build-test
-    - name: checkout
-      script:
-        image: mcr.microsoft.com/dotnet/sdk:5.0
-        workingDir: /work
-        args:
-          - sh
-        # use --depth 1 and --single-branch for fastest possible checkout
-        source: git clone --depth 1 --single-branch --branch {{workflow.parameters.branch}} {{workflow.parameters.repo}} .
-        volumeMounts:
-          - mountPath: /work
-            name: work
-    - name: docker-build-test
+            template: kaniko-build
+    - name: kaniko-build
       container:
-        image: docker:19.03.13
-        command: [sh, -c]
-        workingDir: /work
-        args: ["docker build . -t test:{{workflow.parameters.tag}} && docker run --rm test:{{workflow.parameters.tag}};"]
-        env:
-        - name: DOCKER_HOST
-          value: 127.0.0.1 # need to change to docker build machine ip;
+        image: gcr.io/kaniko-project/executor:latest
+        args:
+        - "--dockerfile=Dockerfile"
+        - "--context=git://{{workflow.parameters.repo}}#refs/heads/{{workflow.parameters.branch}}"
+        - "--destination=docker.io/galsolom/kaniko:{{workflow.parameters.tag}}"
         volumeMounts:
-          - mountPath: /work
-            name: work
-      sidecars:
-      - name: dind
-        image: docker:19.03.13-dind
-        securityContext:
-          privileged: true
-        mirrorVolumeMounts: true
-
-  volumes:
-  # Pass my-existing-volume as an argument to the volumes-existing-example template
-  # Same syntax as k8s Pod spec
-  - name: work
-    persistentVolumeClaim:
-      claimName: argowf-pvc
+        - name: kaniko-secret
+          mountPath: /kaniko/.docker
+      restartPolicy: Never
+      volumes:
+      - name: kaniko-secret
+        secret:
+          secretName: kaniko-docker-secret

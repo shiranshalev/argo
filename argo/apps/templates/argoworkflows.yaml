@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: argoworkflows
+  name: &name argoworkflows
   namespace: argo
   annotations:
     link.argocd.argoproj.io/external-link: https://argoworkflows{{.Values.spec.domain}}
@@ -12,7 +12,7 @@ spec:
     server: {{ .Values.spec.destination.server }}
   source:
     helm:
-      releaseName: argoworkflows
+      releaseName: *name
       version: v3
       valueFiles:
           - values.yaml

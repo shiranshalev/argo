@@ -1,0 +1,11 @@
+apiVersion: v2
+appVersion: v2.4.0
+description: registry
+name: harbor
+version: 1.8.1
+dependencies:
+  - name: harbor
+    version: 1.8.1
+    repository: https://helm.goharbor.io
+
+

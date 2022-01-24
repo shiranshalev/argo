@@ -1,13 +1,13 @@
 apiVersion: v2
 name: kube-state-metrics
 type: application
-version: 4.4.1
+version: 2.2.4
 appVersion: 2.3.0
 home: https://github.com/kubernetes/kube-state-metrics/
 sources:
 - https://github.com/kubernetes/kube-state-metrics/
 dependencies:
   - name: kube-state-metrics
-    version: 4.4.1
-    repository: https://github.com/prometheus-community/helm-charts/
+    version: 2.2.4
+    repository: https://charts.bitnami.com/bitnami
 

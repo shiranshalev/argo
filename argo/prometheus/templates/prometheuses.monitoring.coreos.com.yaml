@@ -4,11 +4,7 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.6.2
     argocd.argoproj.io/sync-options: Replace=true
-  creationTimestamp: "2022-01-24T10:14:59Z"
-  generation: 1
   name: prometheuses.monitoring.coreos.com
-  resourceVersion: "31321"
-  uid: 7dbd9863-d865-469a-b13a-25e9ba74996d
 spec:
   conversion:
     strategy: None

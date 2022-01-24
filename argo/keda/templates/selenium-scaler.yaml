@@ -12,5 +12,5 @@ spec:
   triggers:
     - type: selenium-grid
       metadata:
-        url: 'http://selenium-hub.selenium:4444/graphql'
+        url: 'http://selenium-hub.selenium:4444'
         browserName: 'chrome'

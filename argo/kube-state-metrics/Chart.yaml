@@ -1,0 +1,13 @@
+apiVersion: v2
+name: kube-state-metrics
+type: application
+version: 4.4.1
+appVersion: 2.3.0
+home: https://github.com/kubernetes/kube-state-metrics/
+sources:
+- https://github.com/kubernetes/kube-state-metrics/
+dependencies:
+  - name: kube-state-metrics
+    version: 4.4.1
+    repository: https://github.com/prometheus-community/helm-charts/
+

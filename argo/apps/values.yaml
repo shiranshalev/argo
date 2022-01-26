@@ -13,17 +13,17 @@ enabledApplications:
     namespace: argo
     url: argocd
   - name: argoworkflows
-    enabled: false
+    enabled: true
     namespace: argo
     url: argoworkflows
   - name: prometheus
-    enabled: false
+    enabled: true
     namespace: prometheus
     url: grafana
   - name: minio
-    enabled: false
+    enabled: true
     namespace: minio
     url: consoleminio
   - name: keda
-    enabled: false
+    enabled: true
     namespace: keda

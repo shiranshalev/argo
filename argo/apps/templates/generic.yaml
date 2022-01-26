@@ -4,7 +4,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: {{ $application.name }}
-  namespace: {{ $application.namespace }}
+  namespace: argo
   annotations:
   {{- if $application.url }}
     link.argocd.argoproj.io/external-link: https://{{ $application.url }}{{$.Values.spec.domain}}

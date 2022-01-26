@@ -1,4 +1,14 @@
-## some argo generic ecosystem with self managed argocd server. 
+## some argo generic ecosystem with self managed argocd server on docker-desktop
+install ingress 
+```
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
+```
+
+if using docker desktop windows wsl2 based, ingress controller svc might be stuck on 'pending' waiting for external ip,
+reset to lxssmanager through services did the trick. 
+
+
+
 create certificate
 ```
 mkcert *.gals.local

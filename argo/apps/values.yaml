@@ -14,7 +14,7 @@ enabledApplications:
     url: argocd
     #
   - name: argoworkflows
-    enabled: true
+    enabled: false
     namespace: argo
     url: argoworkflows
     #
@@ -24,10 +24,10 @@ enabledApplications:
     url: grafana
     #
   - name: minio
-    enabled: true
+    enabled: false
     namespace: minio
     url: consoleminio
     #
   - name: keda
-    enabled: true
+    enabled: false
     namespace: keda

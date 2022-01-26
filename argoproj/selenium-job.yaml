@@ -1,0 +1,14 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: grid-tests
+spec:
+  parallelism: 2
+  template:
+    metadata:
+      name: tests
+    spec:
+      containers:
+      - name: c
+        image: docker.io/galsolom/test:tests0.2
+      restartPolicy: Never

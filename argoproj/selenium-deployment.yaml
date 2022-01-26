@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: selenium-test
+  namespace: keda
+spec:
+  selector:
+    matchLabels:
+      app: tests
+      tier: none
+      track: stable
+      type: tests
+  replicas: 5
+  template:
+    metadata:
+      labels:
+        app: tests
+        tier: none
+        track: stable
+        type: tests
+    spec:
+      containers:
+      - name: tests
+        image: docker.io/galsolom/test:tests0.2

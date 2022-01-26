@@ -30,5 +30,6 @@ spec:
       selfHeal: true
       prune: true
 {{- end }}
+---
 {{- end }}
 

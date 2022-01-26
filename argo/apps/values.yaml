@@ -31,3 +31,7 @@ enabledApplications:
   - name: keda
     enabled: false
     namespace: keda
+    #
+  - name: keycloak
+    enabled: true
+    namespace: keycloak

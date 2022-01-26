@@ -1,3 +1,4 @@
+{{- if .Values.keda.scaler.selenium }}
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
@@ -17,3 +18,4 @@ spec:
       metadata:
         url: 'http://selenium-router:4444/graphql'
         browserName: 'chrome'
+{{- end}}

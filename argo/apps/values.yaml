@@ -34,4 +34,5 @@ enabledApplications:
     #
   - name: keycloak
     enabled: true
+    url: keycloak
     namespace: keycloak

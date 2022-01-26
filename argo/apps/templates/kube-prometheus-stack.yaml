@@ -1,26 +1,26 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: kube-prometheus-stack
-  namespace: argo
-  annotations:
-    link.argocd.argoproj.io/external-link: https://grafana{{.Values.spec.domain}}
-spec:
-  project: {{ .Values.spec.project }}
-  destination:
-    namespace: prometheus
-    server: {{ .Values.spec.destination.server }}
-  source:
-    helm:
-      releaseName: kube-prometheus-stack
-      version: v3
-      valueFiles:
-          - values.yaml
-    path: argo/prometheus
-    repoURL: {{ .Values.spec.source.repoURL }}
-    targetRevision: {{ .Values.spec.source.targetRevision }}
-  syncPolicy:
-    automated:
-      selfHeal: true
-      prune: true
+# apiVersion: argoproj.io/v1alpha1
+# kind: Application
+# metadata:
+#   name: kube-prometheus-stack
+#   namespace: argo
+#   annotations:
+#     link.argocd.argoproj.io/external-link: https://grafana{{.Values.spec.domain}}
+# spec:
+#   project: {{ .Values.spec.project }}
+#   destination:
+#     namespace: prometheus
+#     server: {{ .Values.spec.destination.server }}
+#   source:
+#     helm:
+#       releaseName: kube-prometheus-stack
+#       version: v3
+#       valueFiles:
+#           - values.yaml
+#     path: argo/prometheus
+#     repoURL: {{ .Values.spec.source.repoURL }}
+#     targetRevision: {{ .Values.spec.source.targetRevision }}
+#   syncPolicy:
+#     automated:
+#       selfHeal: true
+#       prune: true
 

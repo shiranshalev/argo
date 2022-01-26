@@ -6,3 +6,24 @@ spec:
     targetRevision: main
   project: default
   domain: .gals.local
+
+enabledApplications:
+  - name: argocd
+    enabled: true
+    namespace: argo
+    url: argocd
+  - name: argoworkflows
+    enabled: false
+    namespace: argo
+    url: argoworkflows
+  - name: prometheus
+    enabled: false
+    namespace: prometheus
+    url: grafana
+  - name: minio
+    enabled: false
+    namespace: minio
+    url: consoleminio
+  - name: keda
+    enabled: false
+    namespace: keda

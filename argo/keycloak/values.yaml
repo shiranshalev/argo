@@ -305,7 +305,7 @@ keycloak:
     # ingress for console only (/auth/admin)
     console:
       # If `true`, an Ingress is created for console path only
-      enabled: false
+      enabled: true
       # The name of Ingress Class associated with the console ingress only
       ingressClassName: "nginx"
       # Ingress annotations for console ingress only

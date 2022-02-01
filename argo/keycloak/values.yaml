@@ -319,6 +319,10 @@ keycloak:
           paths:
             - path: /auth/admin/
               pathType: Prefix
+      tls:
+      - hosts:
+          - keycloakconsole.gals.local
+        secretName: "gals-local-tls"
 
   ## Network policy configuration
   networkPolicy:

@@ -321,7 +321,7 @@ keycloak:
               pathType: Prefix
       tls:
       - hosts:
-          - keycloakconsole.gals.local
+          - keycloak.gals.local
         secretName: "gals-local-tls"
 
   ## Network policy configuration

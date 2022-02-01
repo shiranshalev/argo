@@ -314,7 +314,7 @@ keycloak:
       rules:
         -
           # Ingress host
-          host: keycloakconsole.gals.local
+          host: keycloak.gals.local
           # Paths for the host
           paths:
             - path: /auth/admin/

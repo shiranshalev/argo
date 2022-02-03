@@ -33,6 +33,6 @@ enabledApplications:
     namespace: keda
     #
   - name: keycloak
-    enabled: true
+    enabled: false
     url: keycloak
     namespace: keycloak

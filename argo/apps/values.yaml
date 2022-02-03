@@ -14,7 +14,7 @@ enabledApplications:
     url: argocd
     #
   - name: argoworkflows
-    enabled: false
+    enabled: true
     namespace: argo
     url: argoworkflows
     #

@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ClusterWorkflowTemplate
+metadata:
+  annotations:
+    workflows.argoproj.io/description: |
+      checkout out from git, build and test a dotnet application.
+    workflows.argoproj.io/maintainer: '@gals'
+    workflows.argoproj.io/tags: dotnet, git
+    workflows.argoproj.io/version: '>= 2.9.0'
+  name: kaniko-build
+spec:
+  entrypoint: main
+  arguments:
+    parameters:
+      - name: repo
+        value: github.com/galsolom/testapp.git
+      - name: branch
+        value: main
+      - name: tag
+        value: 0.1
+      - name: output
+        value: argo-workflows-catalog
+  templates:
+    - name: main
+      steps:
+        - - name: build
+            template: kaniko-build
+    - name: kaniko-build
+      container:
+        image: gcr.io/kaniko-project/executor:latest
+        args:
+        - "--dockerfile=Dockerfile"
+        - "--context=git://{{workflow.parameters.repo}}#refs/heads/{{workflow.parameters.branch}}"
+        - "--destination=docker.io/galsolom/kaniko:{{workflow.parameters.tag}}"
+        volumeMounts:
+        - name: kaniko-secret
+          mountPath: /kaniko/.docker
+      restartPolicy: Never
+      volumes:
+      - name: kaniko-secret
+        secret:
+          secretName: kaniko-docker-secret

@@ -36,3 +36,7 @@ enabledApplications:
     enabled: false
     url: keycloak
     namespace: keycloak
+    #
+  - name: metallb
+    enabled: true
+    namespace: metallb-system

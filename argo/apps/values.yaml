@@ -38,5 +38,5 @@ enabledApplications:
     namespace: keycloak
     #
   - name: metallb
-    enabled: true
+    enabled: false
     namespace: metallb-system

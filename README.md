@@ -1,18 +1,44 @@
 ## some argo generic ecosystem with self managed argocd server on docker-desktop
-install ingress 
+
+verify kuberentes context and connection
 ```
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/controller-v1.1.1/deploy/static/provider/cloud/deploy.yaml
+kubectl config current-context
+
+# output
+# docker-desktop
+
+kubectl get ns
+
+# output
+# NAME              STATUS   AGE
+# kube-node-lease   Active   1d2h
+# kube-public       Active   1d2h
+# kube-system       Active   1d2h
+# default           Active   1d2h
 ```
 
-if using docker desktop windows wsl2 based, ingress controller svc might be stuck on 'pending' waiting for external ip,
-reset to lxssmanager through services did the trick. 
+install nginx ingress controller, it'll use localhost on the windows machine and WSL2
+```
+kubectl apply -f utils\ingress-controller.yaml
+```
 
-
+if using docker desktop windows wsl2 based, ingress controller svc might be stuck on 'pending' waiting for external  ip or vpnkit-controller pod is in error loop
+ some problem-causers\solutions:
+ powershell as admin
+ ```powershell
+ restart-service iphlpsvc
+ ```
+ 
 
 create certificate
+cmd as admin on windows:
+```cmd
+choco install mkcert
+```
+in root dir:
 ```
 mkcert *.gals.local
-
+# creating the tls secret using the cert above
 kubectl create ns argo
 kubectl create secret tls gals-local-tls --key  _wildcard.gals.local-key.pem --cert _wildcard.gals.local.pem
 ```
@@ -21,6 +47,17 @@ install argocd:
 ```
 helm install argocd -n argo .\argo\argocd
 ```
+add all ingress entries under hosts file
+
+if you already have 127.0.0.1 alias, just add more aliases and save (**as admin! notepad, notepad++,etc**), for example:
+windows path:
+```
+C:\Windows\System32\drivers\etc\hosts
+
+127.0.0.1 kubernetes.docker.internal argocd.gals.local argoworkflows.gals.local grafana.gals.local
+```
+verify argocd login is accessible
+
 in argocd add manually the root app, it'll include argocd itself:
 
 create application in argo namespace with the galsolom/argo.git repo, point to

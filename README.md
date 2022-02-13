@@ -1,4 +1,10 @@
-## some argo generic ecosystem with self managed argocd server on docker-desktop
+# some argo generic ecosystem with self managed argocd server on docker-desktop
+## before starting, change/edit the following:
+
+* argo\apps\values.yaml .spec.source.repoURL, currently points at the github.com/galsolom/argo repository.
+* argo\argocd\values.yaml .repo, same as above.
+* all tls secrets are named gals-local-tls
+* all ingresses point to *.gals.local
 
 verify kuberentes context and connection
 ```
@@ -26,7 +32,7 @@ if using docker desktop windows wsl2 based, ingress controller svc might be stuc
  some problem-causers\solutions:
  powershell as admin
  ```powershell
- restart-service iphlpsvc
+ restart-service iphlpsvc -force
  ```
  
 
@@ -40,7 +46,7 @@ in root dir:
 mkcert *.gals.local
 # creating the tls secret using the cert above
 kubectl create ns argo
-kubectl create secret tls gals-local-tls --key  _wildcard.gals.local-key.pem --cert _wildcard.gals.local.pem
+kubectl create secret tls gals-local-tls --key  _wildcard.gals.local-key.pem --cert _wildcard.gals.local.pem -n argo
 ```
 install argocd:
 (edit values yaml.. mostly ingress & tls secret name)
@@ -48,6 +54,15 @@ install argocd:
 helm install argocd -n argo .\argo\argocd
 ```
 add all ingress entries under hosts file
+```
+# if using gitbash/linux shell, replace " with ' and vice versa
+
+kubectl get ing -n argo -o=jsonpath="{range .items[*]}{.spec.rules[*].host}{'\n'}{end}"
+
+# output
+argocd.gals.local
+argoworkflows.gals.local
+```
 
 if you already have 127.0.0.1 alias, just add more aliases and save (**as admin! notepad, notepad++,etc**), for example:
 windows path:
@@ -57,7 +72,28 @@ C:\Windows\System32\drivers\etc\hosts
 127.0.0.1 kubernetes.docker.internal argocd.gals.local argoworkflows.gals.local grafana.gals.local
 ```
 verify argocd login is accessible
+browse to
+```
+https://argocd.gals.local
+```
+Username: admin
 
+Password:
+```sh
+kubectl -n argo get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+
+
+> if the page is hanging try to restart the iphelper service
+ powershell as admin
+ ```powershell
+ restart-service iphlpsvc -force
+ ```
+
+ 
+
+
+root app wil be automatically installed(apps), below steps are for manual adding the root application
 in argocd add manually the root app, it'll include argocd itself:
 
 create application in argo namespace with the galsolom/argo.git repo, point to

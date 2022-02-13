@@ -16,7 +16,7 @@ spec:
       valueFiles:
           - values.yaml
     path: argo/apps
-    repoURL: https://github.com/galsolom/argo
+    repoURL: {{ .Values.repo }}
     targetRevision: main
   syncPolicy:
     syncOptions:

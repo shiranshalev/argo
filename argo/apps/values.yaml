@@ -2,6 +2,7 @@ spec:
   destination:
     server: https://kubernetes.default.svc
   source:
+    # your fork url
     repoURL: https://github.com/galsolom/argo
     targetRevision: main
   project: default
@@ -14,12 +15,12 @@ enabledApplications:
     url: argocd
     #
   - name: argoworkflows
-    enabled: true
+    enabled: false
     namespace: argo
     url: argoworkflows
     #
   - name: prometheus
-    enabled: true
+    enabled: false
     namespace: prometheus
     url: grafana
     #

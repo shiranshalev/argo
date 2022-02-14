@@ -5,7 +5,7 @@
 * argo\argocd\values.yaml .repo, same as above.
 * all tls secrets are named gals-local-tls
 * all ingresses point to *.gals.local
-
+## installation
 verify kuberentes context and connection
 ```
 kubectl config current-context

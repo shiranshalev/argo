@@ -4,7 +4,7 @@ metadata:
   annotations:
     workflows.argoproj.io/description: |
       checkout out from git, build and test a dotnet application.
-    workflows.argoproj.io/maintainer: '@gals'
+    workflows.argoproj.io/maintainer: '@shirans'
     workflows.argoproj.io/tags: dotnet, git
     workflows.argoproj.io/version: '>= 2.9.0'
   name: dotnet-build-dind
@@ -13,7 +13,7 @@ spec:
   arguments:
     parameters:
       - name: repo
-        value: https://github.com/galsolom/testapp.git
+        value: https://github.com/shiranshalev/testapp.git
       - name: branch
         value: main
       - name: tag

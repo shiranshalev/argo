@@ -291,7 +291,7 @@ keycloak:
     rules:
       -
         # Ingress host
-        host: keycloak.gals.local
+        host: keycloak.shirans.local
         # Paths for the host
         paths:
           - path: /
@@ -299,8 +299,8 @@ keycloak:
     # TLS configuration
     tls:
       - hosts:
-          - keycloak.gals.local
-        secretName: "gals-local-tls"
+          - keycloak.shirans.local
+        secretName: "shirans-local-tls"
 
     # ingress for console only (/auth/admin)
     console:
@@ -314,15 +314,15 @@ keycloak:
       rules:
         -
           # Ingress host
-          host: keycloakconsole.gals.local
+          host: keycloakconsole.shirans.local
           # Paths for the host
           paths:
             - path: /auth/admin/
               pathType: Prefix
       tls:
       - hosts:
-          - keycloakconsole.gals.local
-        secretName: "gals-local-tls"
+          - keycloakconsole.shirans.local
+        secretName: "shirans-local-tls"
 
   ## Network policy configuration
   networkPolicy:

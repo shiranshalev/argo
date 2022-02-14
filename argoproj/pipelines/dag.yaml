@@ -10,7 +10,7 @@ spec:
   arguments:
    parameters:
       - name: repo
-        value: github.com/galsolom/testapp.git
+        value: github.com/shiranshalev/testapp.git
       - name: branch
         value: main
       - name: tag

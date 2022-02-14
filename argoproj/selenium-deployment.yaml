@@ -21,4 +21,4 @@ spec:
     spec:
       containers:
       - name: tests
-        image: docker.io/galsolom/test:tests0.2
+        image: docker.io/shiranshalev/test:tests0.2

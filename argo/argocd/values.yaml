@@ -1,4 +1,4 @@
-repo: &repo https://github.com/galsolom/argo
+repo: &repo https://github.com/shiranshalev/argo
 argo-cd:
   server:
     extraArgs: 
@@ -9,7 +9,7 @@ argo-cd:
       ingressClassName: "nginx"
 
       hosts:
-        - argocd.gals.local
+        - argocd.shirans.local
 
       paths:
         - /
@@ -17,9 +17,9 @@ argo-cd:
       extraPaths: []
 
       tls:
-        - secretName: gals-local-tls
+        - secretName: shirans-local-tls
           hosts:
-            - argocd.gals.local
+            - argocd.shirans.local
 
   configs:
     repositories: 

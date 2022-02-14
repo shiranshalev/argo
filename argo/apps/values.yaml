@@ -3,10 +3,10 @@ spec:
     server: https://kubernetes.default.svc
   source:
     # your fork url
-    repoURL: https://github.com/galsolom/argo
+    repoURL: https://github.com/shiranshalev/argo
     targetRevision: main
   project: default
-  domain: .gals.local
+  domain: .shirans.local
 
 enabledApplications:
   - name: argocd

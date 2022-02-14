@@ -19,7 +19,7 @@ argo-workflows:
       ingressClassName: nginx
 
       hosts: 
-        - argoworkflows.gals.local
+        - argoworkflows.shirans.local
 
       paths:
         - /
@@ -28,6 +28,6 @@ argo-workflows:
       extraPaths: []
 
       tls: 
-        - secretName: gals-local-tls
+        - secretName: shirans-local-tls
           hosts:
-            - argoworkflows.gals.local
+            - argoworkflows.shirans.local

@@ -23,18 +23,11 @@ kubectl get ns
 # default           Active   1d2h
 ```
 
-install nginx ingress controller, it'll use localhost on the windows machine and WSL2
+install nginx ingress controller
 ```
 kubectl apply -f utils\ingress-controller.yaml
 ```
 
-if using docker desktop windows wsl2 based, ingress controller svc might be stuck on 'pending' waiting for external  ip or vpnkit-controller pod is in error loop
- some problem-causers\solutions:
- powershell as admin
- ```powershell
- restart-service iphlpsvc -force
- ```
- 
 
 create certificate
 cmd as admin on windows:
@@ -64,12 +57,12 @@ argocd.gals.local
 argoworkflows.gals.local
 ```
 
-if you already have 127.0.0.1 alias, just add more aliases and save (**as admin! notepad, notepad++,etc**), for example:
+add the aliases and save (**as admin! notepad, notepad++,etc**), for example:
 windows path:
 ```
 C:\Windows\System32\drivers\etc\hosts
 
-127.0.0.1 kubernetes.docker.internal argocd.gals.local argoworkflows.gals.local grafana.gals.local
+127.0.0.240 kubernetes.docker.internal argocd.gals.local argoworkflows.gals.local grafana.gals.local
 ```
 verify argocd login is accessible
 browse to
@@ -84,10 +77,10 @@ kubectl -n argo get secret argocd-initial-admin-secret -o jsonpath="{.data.passw
 ```
 
 
-> if the page is hanging try to restart the iphelper service
+> if the page is hanging try to stop the iphelper service, 2 process fighting for 0.0.0.0:443 LISTEN.
  powershell as admin
  ```powershell
- restart-service iphlpsvc -force
+ stop-service iphlpsvc -force
  ```
 
  

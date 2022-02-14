@@ -4,5 +4,8 @@ metallb:
     - name: default
       protocol: layer2
       addresses:
-      - 127.0.0.240/28
-
+      - 127.0.0.241-127.0.0.250
+    - name: ingress
+      protocol: layer2
+      addresses:
+      - 127.0.0.240/32

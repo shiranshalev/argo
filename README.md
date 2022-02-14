@@ -41,6 +41,21 @@ install argocd:
 ```
 helm install argocd -n argo .\argo\argocd
 ```
+sync root app
+
+```powershell
+# get initial password
+$argocdpass = kubectl -n argo get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | %{[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_))}
+# get argocd server pod
+$argocdpodname = kubectl get pods -n argo -l app.kubernetes.io/name=argocd-server | ?{$_ -like "*argocd-server*"} | %{$_.split()[0]} 
+
+# login
+kubectl exec -it $argocdpodname -n argo -- argocd login --insecure --grpc-web argocd-server  --username admin --password $argocdPass --plaintext
+# sync root app sometimes it takes few seconds to return a response, no harm running more times..
+kubectl exec -it $argocdpodname -n argo -- argocd app sync apps
+```
+
+
 add all ingress entries under hosts file
 ```
 # if using gitbash/linux shell, replace " with ' and vice versa
@@ -67,14 +82,16 @@ https://argocd.gals.local
 Username: admin
 
 Password:
-```sh
-kubectl -n argo get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```powershell
+kubectl -n argo get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | %{[System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($_))} | scb
 ```
 
 
 > if the page is hanging try to stop the iphelper service, 2 process fighting for 0.0.0.0:443 LISTEN.
  powershell as admin
  ```powershell
+ restart-service iphlpsvc -force
+ # once working, stop the service..
  stop-service iphlpsvc -force
  ```
 

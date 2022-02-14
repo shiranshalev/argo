@@ -1,6 +1,0 @@
-ingress-nginx:
-  controller:
-    service:
-      enabled: true
-      annotations: 
-        metallb.universe.tf/address-pool: ingress

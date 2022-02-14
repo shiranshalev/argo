@@ -37,7 +37,11 @@ enabledApplications:
     enabled: false
     url: keycloak
     namespace: keycloak
-    #
+# network
   - name: metallb
     enabled: true
     namespace: metallb-system
+    #
+  - name: ingress-nginx
+    enabled: true
+    namespace: ingress-nginx

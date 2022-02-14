@@ -23,11 +23,6 @@ kubectl get ns
 # default           Active   1d2h
 ```
 
-install nginx ingress controller
-```
-kubectl apply -f utils\ingress-controller.yaml
-```
-
 
 create certificate
 cmd as admin on windows:
